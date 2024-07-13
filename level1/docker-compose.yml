@@ -1,0 +1,10 @@
+services:
+  wireguard:
+    build: .
+    ports:
+      - '$LEVEL1_DOCKER_CONTAINER_LISTENING_PORT:$LEVEL1_WIREGUARD_PROCESS_LISTENING_PORT/udp' # See `.env`
+    env_file: '.env'
+    environment:
+      - LEVEL1_PUBLIC_FACING_IP_OR_HOST # See start.sh
+    cap_add:
+      - NET_ADMIN # Needed to run iptables commands, otherwise: error: "iptables v1.8.10 (nf_tables): Could not fetch rule set generation id: Permission denied (you must be root)"

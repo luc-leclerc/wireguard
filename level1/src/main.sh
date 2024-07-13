@@ -12,8 +12,8 @@ function startDemo() {
     echo '[Interface]';
     echo "PrivateKey = $serverPrivate"
     echo "Address = 10.42.130.1/24"
-    echo "MTU = $MY_WG_MTU"
-    echo "ListenPort = $MY_WG_LISTENING_PORT"
+    echo "MTU = 1420"
+    echo "ListenPort = $LEVEL1_WIREGUARD_PROCESS_LISTENING_PORT"
     echo
     echo '[Peer]'
     echo "PublicKey = $clientPublic"
@@ -26,14 +26,18 @@ function startDemo() {
     echo "[Interface]"
     echo "PrivateKey = $clientPrivate"
     echo "Address = 10.42.130.2/24"
-    echo "DNS = 1.1.1.1, 8.8.8.8"
+    echo "DNS = 1.1.1.1, 8.8.8.8" # Cloudflare as primary DNS, Google as secondary DNS
     echo
     echo "[Peer]"
     echo "PublicKey = $serverPublic"
     echo "PresharedKey = $preSharedKey"
-    echo "Endpoint = $MY_PUBLIC_FACING_IP_OR_HOST:$MY_PUBLIC_FACING_PORT"
+    echo "PersistentKeepalive = 25" # Optional config, should help with long-lived TCP connection with hardly any data flowing
+    echo "Endpoint = $LEVEL1_PUBLIC_FACING_IP_OR_HOST:$LEVEL1_PUBLIC_FACING_LISTENING_PORT"
+    # Value '0.0.0.0/0, ::0/0' will ensure that all traffic goes through our tunnel; this can be changed so only traffic for internal resources will use VPN.
     echo "AllowedIPs = 0.0.0.0/0, ::0/0"
-  } | qrencode --t ansiutf8;
+  } > "/etc/wireguard/client.conf";
+  cat "/etc/wireguard/client.conf" | qrencode --t ansiutf8 > "/etc/wireguard/client-qrcode.txt";
+  cat "/etc/wireguard/client-qrcode.txt";
 
   iptables -t nat \
     -I POSTROUTING \
@@ -48,3 +52,5 @@ function startDemo() {
 }
 
 startDemo
+
+sleep infinity
