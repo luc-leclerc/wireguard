@@ -1,8 +1,17 @@
 # WireGuard
 
-Project to learn about WireGuard. 
+Project to learn about WireGuard.
 
-Recommendation: Look at code in `level1` folder; and get the server running to route your cellphone traffic in your home network.
+## level1
+
+Base code to get a WireGuard server running with docker container to route all traffic through a VPN.
+
+## level 2
+
+This is a second iteration, with extra features:
+
+* Externalized configuration
+* 
 
 # FYI
 

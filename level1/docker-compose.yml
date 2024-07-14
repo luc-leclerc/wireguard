@@ -1,5 +1,6 @@
 services:
   wireguard:
+    image: wireguard:level1
     build: .
     ports:
       - '$LEVEL1_DOCKER_CONTAINER_LISTENING_PORT:$LEVEL1_WIREGUARD_PROCESS_LISTENING_PORT/udp' # See `.env`

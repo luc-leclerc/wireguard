@@ -1,3 +1,3 @@
-# WireGuard - Level 2 - Externalizing configs
+# WireGuard - Level 2
 
-With this setup, you can share QR codes to friends, and restart your server will not result in new keys generated.
+Externalizing configs

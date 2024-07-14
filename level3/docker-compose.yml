@@ -1,0 +1,19 @@
+services:
+  wireguard:
+    image: wireguard:level3
+    build: .
+    ports:
+      - '$LEVEL3_DOCKER_CONTAINER_LISTENING_PORT:$LEVEL3_WIREGUARD_PROCESS_LISTENING_PORT/udp' # See `.env`
+    env_file: '.env'
+    environment:
+      - LEVEL3_PUBLIC_FACING_IP_OR_HOST # See start.sh
+      - LEVEL3_WG_PRIVATE_KEY
+      - LEVEL3_WG_JSON_CONFIG
+
+      # Some default configs
+      - LEVEL3_VPN_NETWORK=10.15.15.0/24
+      - LEVEL3_WG_MTU=1420
+      - LEVEL3_WG_PERSISTENT_KEEPALIVE_SECONDS=25
+      - LEVEL3_WG_CLIENT_DNS=1.1.1.1, 8.8.8.8
+    cap_add:
+      - NET_ADMIN # Needed to run iptables commands, otherwise: error: "iptables v1.8.10 (nf_tables): Could not fetch rule set generation id: Permission denied (you must be root)"
