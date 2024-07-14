@@ -4,14 +4,15 @@ Project to learn about WireGuard.
 
 ## level1
 
-Base code to get a WireGuard server running with docker container to route all traffic through a VPN.
+* Base code to get a WireGuard server running with docker container to route all traffic through a VPN.
 
 ## level 2
 
-This is a second iteration, with extra features:
-
 * Externalized configuration
-* 
+
+## level 3
+
+* Reducing security risks, running without root user.
 
 # FYI
 
