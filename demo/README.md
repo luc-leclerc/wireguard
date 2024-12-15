@@ -5,8 +5,8 @@ Run with less code to ease learning.
 # Setup
 
 * Configure your router to redirect UDP traffic from port 44446 to 44444 on the host running wireguard server.
-* Run `./start.sj` to start the server, a QR code with sample credential for 1 client.
-* Install wireguard on your cellphone, and scan the QR code.
+* Run `./start-demo-wireguard-server.sh` to start the server, a QR code with sample credential for 1 client will be shown.
+* Install wireguard client on your cellphone, and scan the QR code.
 
 # Potential issues
 
