@@ -1,0 +1,11 @@
+services:
+  wireguard:
+    image: your-wireguard:latest
+    build: .
+    ports:
+      - '44444:51111/udp'
+    environment:
+      - YOUR_WG_PRIVATE_KEY
+      - YOUR_WG_JSON_CONFIG
+    cap_add:
+      - NET_ADMIN # Needed to run iptables commands, otherwise: error: "iptables v1.8.10 (nf_tables): Could not fetch rule set generation id: Permission denied (you must be root)"
